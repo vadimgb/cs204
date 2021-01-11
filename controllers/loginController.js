@@ -1,18 +1,16 @@
 const {pool} = require('../models/pgConfig')
 const fetch = require('node-fetch')
-//const cookieSession = require('cookie-session')
-//const cookie_secret = process.env.COOKIE_SECRET
 
 const client_id = process.env.GITHUB_CLIENT_ID 
 const client_secret = process.env.GITHUB_CLIENT_SECRET
-//const host = '90.188.117.161'
 const host='cs204.heroku.com'
 const PORT = process.env.PORT || 8000
 
 //1. Request a user's GitHub identity
 exports.index = async (req, res) =>
 {
-	const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://${host}:${PORT}/login/github/callback`
+	//В адресе не нужен порт на heroku 
+	const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://${host}/login/github/callback`
 	res.redirect(url)
 }
 
