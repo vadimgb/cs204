@@ -5,7 +5,8 @@ const fetch = require('node-fetch')
 
 const client_id = process.env.GITHUB_CLIENT_ID 
 const client_secret = process.env.GITHUB_CLIENT_SECRET
-const host = '90.188.117.161'
+//const host = '90.188.117.161'
+const host='cs204.heroku.com'
 const PORT = process.env.PORT || 8000
 
 //1. Request a user's GitHub identity
