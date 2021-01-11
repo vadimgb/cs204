@@ -24,13 +24,18 @@ exports.gradebook = async function (req, res)
 
 exports.pset = async function(req, res)
 {
-	res.render('character/pset.ejs',{id_pset: req.params.id_pset})
+	res.render('character/pset.ejs',{id_pset: req.params.id_pset, type: req.params.type})
 }
 
 exports.api_pset = async (req, res) =>
 	{
-		const {url, id_problemset, username} = req.body
+		let {url, id_problemset, username, type} = req.body
 		const timestamp1 = new Date()
+		if(type != 'v')
+		{
+			url = `https://github.com/cs204/${username}/tree/pset${id_problemset}`
+		}
+		
 		const url_exists = await urlExists(url);
 		try
 		{

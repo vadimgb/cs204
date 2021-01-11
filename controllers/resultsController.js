@@ -39,6 +39,5 @@ exports.api_grades = async (req, res) =>
 		gradebook.push(character)
 	}
 	result.gradebook = gradebook
-	console.log(result.gradebook[0].grades[1])
 	res.send(JSON.stringify(result))
 }

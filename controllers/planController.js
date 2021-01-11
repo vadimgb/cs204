@@ -13,7 +13,6 @@ exports.api_list = async (req, res) =>
 	const problemset = await pool.query(`select problemset.name, problemset.id 
 		from problemset join plan on id_problemset = problemset.id 
 		where id_house = $1;`, [id_house])
-	console.log(problemset.rows)
 	res.send(JSON.stringify(problemset.rows))
 }
 
