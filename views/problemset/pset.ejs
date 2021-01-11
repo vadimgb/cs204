@@ -1,0 +1,20 @@
+<%- include('../partials/head.ejs') %>
+<script src="javascripts/problemset/pset.js"> 
+</script>
+</head>
+<body>
+	<div class="container">
+	<h2>Задания</h2>
+		<table class='table' id='psetTable'>
+		</table>
+		<input id = 'deleteForm' type='button' value='Удалить выбранное'>
+
+	<h2>Добавить</h2>
+		<input id="nameInput" placeholder="Название задания" required >
+		<input id="addForm" type="button" value="Добавить">
+
+	<br>
+	<a href="/teacher/dashboard">Дашборд</a>
+	</div>
+</body>
+</html>

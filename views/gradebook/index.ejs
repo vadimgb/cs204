@@ -1,0 +1,24 @@
+<%- include('../partials/head.ejs') %>
+<title>Оценки</title>
+<script src='javascripts/gradebook/index.js' ></script>
+</head>
+<body>
+	<div class='container'>
+		<select autocomplete='off' id='houseSelect' name = 'id_house' required >
+			<option  selected disabled value=''>Выберите группу</option>
+				<% for(let row of houses){%>
+					<option value=<%= row.id %> ><%= row.house %></option>
+				<%}%>
+		</select>
+		<select autocomplete='off' id='psetSelect' name = 'id_pset' required >
+			<option selected displead value=''> Выберите задание</option>
+		</select>
+		<br>
+		<table class='table' id='gradesTable'>
+		</table>
+		<a href = "/teacher/dashboard">Дашборд</a>
+	
+	</div>
+</body>	
+</html>
+

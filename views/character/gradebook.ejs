@@ -1,0 +1,20 @@
+<%- include('../partials/head.ejs') %>
+<title>Дневник</title>
+</head>
+<body>
+	<div class="container">
+		<h1><%= username %> дневник</h1>
+			<table class='table table-prime'>
+			<% for(let res of result) { %>
+				<tr>
+					<td><%= res.name %></td> 
+					<td> <%= res.grade %></td>
+					<td><%= res.notes %></td>
+				<%}%>
+				</tr>
+			</table>
+			<a href="/logout">logout</a>
+	</div>
+
+</body>
+</html>

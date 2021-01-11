@@ -1,0 +1,22 @@
+<%- include('../partials/head.ejs') %>
+<title>Задание <%=id_pset %></title>
+</head>
+<body>
+<div class='container'>
+	<h1>Отчёт по выполнению задания</h1>
+	<form action='/character/api_pset' method='post'>
+		<input type='hidden' value='<%= id_pset %>' name='id_problemset'> 
+		<div class='mb-3'>
+			<label for='login' class='form-label'>Укажите GitHub username</label>
+			<input class='form-control' autocomplete = 'off' name='username'  required/><br>
+		</div>
+		<div class='mb-3'>
+			<label for='url1' class='form-label'>Введите адрес скринкаста</label>
+			<input class='form-control' autocomplete = 'off' name='url'  required/>
+		</div>
+			<input class='btn btn-primary' type='submit' value='Отправить'/>
+	</form>
+	</div>
+
+</body
+</html>

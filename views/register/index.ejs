@@ -1,0 +1,24 @@
+<%- include('../partials/head.ejs') %>
+<title>Регистрация</title>
+</head>
+<body>
+	<div class='container'>
+		Ваше имя на Github :	<%= username %><br>
+		email:  <%= email %><br>
+		<h2>Введите свои данные</h2>
+		<form class='form' action="/register" method="POST">
+			<input class='form-control' name = "lastname" placeholder="Фамилия" required><br>
+			<input class='form-control' name ="firstname" placeholder="Имя" required><br>
+			<input class='form-control' name = "surname"  placeholder="Отчество" required><br>
+			<select class='form-select' id="house" name="id_house" required>
+				<option selected disabled value="">Выберите свою группу</option>
+				<% for(let row of houses){%>
+				<option value = <%= row.id %> > <%= row.house %> </option>
+				<%}%>	
+			</select>
+			<br>
+			<input class='btn btn-primary' type="submit" value="Подтвердить">
+		</form>
+	</div>
+</body>
+</html>

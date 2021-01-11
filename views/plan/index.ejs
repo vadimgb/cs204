@@ -1,0 +1,41 @@
+<%- include('../partials/head.ejs') %>
+<script src='javascripts/plan/index.js'></script>
+</head>
+<body>
+	<div class='container'>
+		<div class='row'>
+			<select autocomplete='off' id='houseSelect' name = 'id_house' required >
+				<option  selected disabled value=''>Выберите группу</option>
+					<% for(let row of houses){%>
+						<option value=<%= row.id %> ><%= row.house %></option>
+					<%}%>
+			</select>
+
+		</div>
+
+		<div class='row'>
+		<h2>Задания</h2>
+		
+			<div class='row'>
+				<table class='table' id='psetTable'>
+				</table>
+			</div>
+			<div class='row'>
+				<input type="button"  id="deleteForm" value='Удалить выбранное'/>
+			</div>
+		</div>
+			
+		<h2>Добавить</h2>
+			<select autocomplete='off' id='psetSelect' name ='id_pset' required >
+				<option  selected disabled value=''>Выберите задание</option>
+					<% for(let row of pset){%>
+						<option value=<%= row.id %> ><%= row.name %></option>
+					<%}%>
+			</select>
+			<input type=button id="addForm" value='Добавить'/>
+
+
+		<a href = "/teacher/dashboard">Дашборд</a>
+	</div>
+</body>
+</html>

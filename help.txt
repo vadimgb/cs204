@@ -1,0 +1,20 @@
+const gradebook = []
+const characters = await pool.query('select id, firstname, lastname, surname from characters where id_house = $1 order by lastname;', [id_house])
+for(let row of characters.rows)
+{
+	const character = {}
+	character.id = row[id]
+	character.firstname = row[firstname]
+	character.lastname =row[lastname]
+	character.surname = row[surname]
+	character.grades ={} 
+	const grades = await pool.query('select id_problemset, grade from gradebook where id_character = 1;', [row[id]])
+	for(let row2 of grades)
+	{
+		character.grades[row2[id_problemset]] = row2[grade]
+	}
+	gradebook.push(character)
+}
+console.log(gradebook)
+res.send(JSON.stringify(gradebook))
+
