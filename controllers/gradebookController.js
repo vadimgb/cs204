@@ -24,7 +24,7 @@ exports.api_grades = async (req, res) =>
 		select1.is_done, select1.is_checked,  select1.timestamp_done, select1.id_character, select1.id_problemset
 		from characters 
 		left join (select * from gradebook where id_problemset = $1) select1 
-		on characters.id = select1.id_character where id_house = $2;` 
+		on characters.id = select1.id_character where id_house = $2 order by lastname;` 
 	let result = await pool.query(sql1,[id_pset, id_house]);
 	res.send(JSON.stringify(result.rows))
 }

@@ -38,6 +38,7 @@ var resultsRouter = require('./routes/results.js')
 var loginRouter = require('./routes/login.js')
 var registerRouter = require('./routes/register.js')
 var characterRouter = require('./routes/character.js')
+var pendingRouter = require('./routes/pending.js')
 
 app.use('/', indexRouter)
 app.use('/teacher',  teacherRouter)
@@ -48,7 +49,7 @@ app.use('/results', resultsRouter)
 app.use('/login/github', loginRouter)
 app.use('/register', registerRouter)
 app.use('/character', characterRouter)
-
+app.use('/pending', pendingRouter)
 module.exports = app
 
 

@@ -51,7 +51,7 @@ let taskCounter = 0
 		insert into characters (username, firstname, lastname, id_house) values ('vadimgb', 'Vadim', 'B', 1);`
 		
 		pool.query(sql1)
-		//await csvToDb()
+	//	await csvToDb()
 	})()
 
 function csvToDb()

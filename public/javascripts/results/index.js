@@ -29,7 +29,14 @@ async function grades_rows()
 		for(let problem of pset)
 		{
 			let cellGrade = row.insertCell()
-			cellGrade.innerHTML = grades[i].grades[problem['id_problemset']]
+			if(problem['id_problemset'] == 1)
+			{ 
+				cellGrade.innerHTML = `<input size=1 value='${grades[i].grades[problem['id_problemset']]}' onchange='addGradeToDb(this.value, ${grades[i].id}, ${problem['id_problemset']})'>`;
+			}
+			else
+			{ 
+				cellGrade.innerHTML = grades[i].grades[problem['id_problemset']];
+			}
 		}
 
 	}
@@ -47,6 +54,18 @@ async function grades_rows()
 		cellId.innerHTML = pset[i]['id_problemset']
 		cellName.innerHTML = pset[i]['name']
 	}
+}
+
+async function addGradeToDb(grade, id_character, id_problemset)
+{
+	const data = {grade: grade, id_character: id_character, id_problemset: id_problemset}
+	const url = '/gradebook/api_addGradeToDb'
+	await fetch(url, 
+		{
+			method:'POST',
+			headers:{'Content-Type':'application/json'},
+			body: JSON.stringify(data)
+		})
 }
 
 
