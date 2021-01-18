@@ -3,7 +3,7 @@ const {createRepo, } =require('../helper.js')
 
 exports.index = async (req, res)=>
 	{
-		const sql1 = `select id, house from houses where id <> 1;`
+		const sql1 = `select id, house from houses where id <> 1 and is_active = true;`
 		pool.query(sql1, (err, res1)=>
 			{
 				if(err)

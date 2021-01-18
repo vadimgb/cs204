@@ -1,0 +1,1 @@
+curl -v -u vadimgb -X POST https://api.github.com/authorizations -d '{"scopes":["delete_repo"], "note":"token with delete repo scope"}'

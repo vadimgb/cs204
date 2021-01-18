@@ -2,7 +2,7 @@ const {pool} = require('../models/pgConfig')
 
 exports.index = async (req, res) =>
 {
-	const request = await pool.query('select * from houses where id <> 1;')
+	const request = await pool.query('select * from houses where id <> 1 and is_active = true;')
 	res.render('results/index.ejs', {houses: request.rows})
 }
 

@@ -46,7 +46,7 @@ exports.api_pset = async (req, res) =>
 			}
 			else if(!url_exists)
 			{
-				res.send('Неправильный адрес скринкаста. Wrong screencast')
+				res.send('Неправильный адрес url. Wrong url')
 			}
 			else
 			{

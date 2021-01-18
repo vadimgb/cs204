@@ -1,5 +1,3 @@
-//var cookieSession = require('cookie-session')
-//const cookie_secret = process.env.COOKIE_SECRET
 const fetch = require('node-fetch')
 
 exports.redirectLoginTeacher = function (req, res, next)
@@ -48,6 +46,31 @@ exports.createRepo = async function(org_token, token, name)
 	}
 }
 
+exports.deleteRepo = async function(org_token, token, name)
+{
+	const haveR = await haveRepo(token, name)
+	if(haveR)
+	{
+
+		const url1 = `https://api.github.com/repos/cs204/${name}`
+		try
+		{
+			await fetch(url1, 
+				{
+					method: 'delete',
+					headers:
+					{
+						"Accept": "application/vnd.github.v3+json",
+						"Authorization": `tosk ${org_token}`
+					}
+				})
+		}
+		catch(err)
+		{
+			console.log(err)
+		}
+	}
+}
 
 //--------------
 //
