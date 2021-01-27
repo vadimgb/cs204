@@ -37,8 +37,8 @@ exports.register =  async (req, res)=>
 		}
 		catch(err)
 		{ 
-			res.send('Error adding date to db')
-			console.log("Error in registering", err)
+			res.send('Ошибка  добавления данных в базу. Error in registering')
+			console.log("Ошибка, добавления данных в базу. Error in registering", err)
 		}
 
 	}

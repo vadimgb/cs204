@@ -38,7 +38,9 @@ async function grades_rows()
 				cellGrade.innerHTML = grades[i].grades[problem['id_problemset']];
 			}
 		}
-
+		
+		let cellRemove = row.insertCell() 
+		cellRemove.innerHTML = `<input class=messageCheckbox type=checkbox name='remove_list[]' value='${grades[i].id}'/>`
 	}
 
 	rowCount = psetTable.rows.length
@@ -68,13 +70,42 @@ async function addGradeToDb(grade, id_character, id_problemset)
 		})
 }
 
+async function deleteCharacters()
+{
+	const check = prompt('Вы уверены, что их надо удалить? Если да то введите kill.', 'no')
+	if(check == 'kill')
+	{
+		const url = '/results/api_delete'
+		const remove_list = [] 
+		const chboxes = document.getElementsByName('remove_list[]')
+		const len = chboxes.length
+		for(let i = 0; i < len; ++i)
+		{
+			if(chboxes[i].checked) remove_list.push(chboxes[i].value)
+		}
+		if(remove_list.length)
+		{
+			const data = {'remove_list': remove_list}
+			await fetch(url, 
+			{
+				method:'POST',
+				headers:{'Content-Type':'application/json'},
+				body: JSON.stringify(data)
+			})
+			await grades_rows()
+		}
+	}
+}
 
 document.addEventListener('DOMContentLoaded', ()=>
 	{
 		var gradesTable = document.querySelector('#gradesTable')
 		var houseSelect = document.querySelector('#houseSelect')
 		var psetTable = document.querySelector('#psetTable')
+		var deleteBtn = document.querySelector('#deleteBtn')
 		houseSelect.addEventListener('input', grades_rows)
+		deleteBtn.addEventListener('click', deleteCharacters)
 	}
 )
-	
+
+

@@ -4,23 +4,30 @@
 </head>
 <body>
 	<div class='container'>
-		<select autocomplete='off' id='houseSelect' name = 'id_house' required >
-			<option  selected disabled value=''>Выберите группу</option>
-				<% for(let row of houses){%>
-					<option value=<%= row.id %> ><%= row.house %></option>
-				<%}%>
-		</select>
-		<br>
-		<table class ='table table-success' id='gradesTable'>
-		</table>
-		<br>
+		<div class='row'>
+			<select autocomplete='off' id='houseSelect' name = 'id_house' required >
+				<option  selected disabled value=''>Выберите группу</option>
+					<% for(let row of houses){%>
+						<option value=<%= row.id %> ><%= row.house %></option>
+					<%}%>
+			</select>
+		</div>
+		<div class='row'>
+			<table class ='table table-success' id='gradesTable'>
+			</table>
+		</div>
+		<div class='row'>
+				<input type="button"  id="deleteBtn" value='Удалить выбранное'/>
+		</div>
 
 		<h2>Задания</h2>
-		<table class='table table-info' id='psetTable'>
-		</table>
-		<a href = "/teacher/dashboard">Дашборд</a>
-	
-
+		<div class='row'>
+			<table class='table table-info' id='psetTable'>
+			</table>
+		</div>
+		<div class='row'>
+			<a href = "/teacher/dashboard">Дашборд</a>
+		</div>
 	</div>	
 </body>
 </html>

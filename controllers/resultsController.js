@@ -1,4 +1,5 @@
 const {pool} = require('../models/pgConfig')
+const {createRepo, deleteRepo} =require('../helper.js')
 
 exports.index = async (req, res) =>
 {
@@ -40,4 +41,30 @@ exports.api_grades = async (req, res) =>
 	}
 	result.gradebook = gradebook
 	res.send(JSON.stringify(result))
+}
+
+exports.api_delete = async (req, res) =>
+{
+	const remove_list = req.body.remove_list
+	try
+	{
+	const sql =`select username from characters where id in (${remove_list});` 
+	const sql2 = `delete from gradebook where id_character in (${remove_list}); 
+			delete from characters where id in (${remove_list});`
+	const usernames = await pool.query(sql)
+	if(usernames.rows.length)
+	{
+		for(let i = 0; i < usernames.rows.length; i++)
+		{ 
+			deleteRepo(process.env.TSPU_TOKEN, usernames.rows[i]['username'])
+		}
+	}
+	await pool.query(sql2)		
+	res.send('Ok')
+	}
+	catch(err)
+	{
+		console.log('Error in deleting ----------------------------')
+		console.log(err)
+	}
 }

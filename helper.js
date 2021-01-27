@@ -46,22 +46,23 @@ exports.createRepo = async function(org_token, token, name)
 	}
 }
 
-exports.deleteRepo = async function(org_token, token, name)
+exports.deleteRepo = async function(org_token, name)
 {
-	const haveR = await haveRepo(token, name)
+	const haveR = await orgHaveRepo(org_token, name)
 	if(haveR)
 	{
-
 		const url1 = `https://api.github.com/repos/cs204/${name}`
 		try
 		{
+			console.log(url1)
+			
 			await fetch(url1, 
 				{
 					method: 'delete',
 					headers:
 					{
 						"Accept": "application/vnd.github.v3+json",
-						"Authorization": `tosk ${org_token}`
+						"Authorization": `token ${org_token}`
 					}
 				})
 		}
@@ -87,6 +88,23 @@ async function haveRepo(token, user)
 	const repos = await res.json()
 	for(let repo of repos)
 		if(repo.full_name == `cs204/${user}`)
+			haveR = true
+	return haveR
+}
+
+async function orgHaveRepo(token, username)
+{
+	let haveR = false
+	const res = await fetch("https://api.github.com/orgs/cs204/repos",
+		{
+			headers:
+			{
+				"Authorization": `token ${token}`
+			}
+		})
+	const repos = await res.json()
+	for(let repo of repos)
+		if(repo.name == username)
 			haveR = true
 	return haveR
 }
