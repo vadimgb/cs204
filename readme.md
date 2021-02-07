@@ -47,7 +47,18 @@ https://cs204.herokuapp.com/character/pset/2/c -пример для 2 задан
 4. node-fetch
 5. body-parser  
 
-## 
+## авто запуск
+sudo npm install -g pm2
+pm2 start bin/www -i max
+pm2 startup -копируем генерированный скрипт
+pm2 save - сохраняем в $home/.pm2/dump.pm2
+pm2 unstartup
+
+
+## router
+192.168.1.1
+access->virtual server
+ 
 
 
 
