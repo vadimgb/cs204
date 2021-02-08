@@ -37,20 +37,26 @@ let taskCounter = 0
 
 		insert into houses (house, is_active, id_education_type) values  ('Teacher', false, 1); 
 
-		insert into houses (house, is_active, id_education_type) values   ('7801п', true, 2),
-		('11801Лр', true, 2), ('11801Тр', true, 2), ('301ИО', true, 2), ('7901мГМУ', true, 2), 
-		('7901эФИК', true, 2), ('301РЯ', true, 2); 
+		insert into houses (house, is_active, id_education_type) values   ('204', true, 1),
+		('206', true, 1), ('207', true, 1), ('301', true, 1), ('302', true, 1), 
+		('303', true, 1), ('304', true, 1), ('795', true, 1); 
 
 		insert into problemset (name) values 
 		('Зачёт'),
+		('Экзамен'),
 		('Первая программа'), 
 		('Статический сайт'), 
+		('Github'),
 		('Задача о рюкзаке'), 
 		('Динамический сайт');
 
 		insert into characters (username, firstname, lastname, id_house) values ('vadimgb', 'Vadim', 'B', 1);`
 		
-		pool.query(sql1)
+		pool.query(sql1, (err, result) => {
+			if(err) console.log(err)
+			pool.end()
+		})
+		
 	//	await csvToDb()
 	})()
 
