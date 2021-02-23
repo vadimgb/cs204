@@ -39,6 +39,7 @@ var loginRouter = require('./routes/login.js')
 var registerRouter = require('./routes/register.js')
 var characterRouter = require('./routes/character.js')
 var pendingRouter = require('./routes/pending.js')
+var emailRouter = require('./routes/email.js')
 
 app.use('/', indexRouter)
 app.use('/teacher',  teacherRouter)
@@ -50,6 +51,7 @@ app.use('/login/github', loginRouter)
 app.use('/register', registerRouter)
 app.use('/character', characterRouter)
 app.use('/pending', pendingRouter)
+app.use('/email', emailRouter)
 module.exports = app
 
 

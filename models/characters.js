@@ -50,7 +50,7 @@ let taskCounter = 0
 		('Задача о рюкзаке'), 
 		('Динамический сайт');
 
-		insert into characters (username, firstname, lastname, id_house) values ('vadimgb', 'Vadim', 'B', 1);`
+		insert into characters (username, firstname, lastname, surname, email, id_house) values ('vadimgb', 'Vadim', 'Bulenok', 'Gennadievich', 'vadimgb@yandex.ru', 1), ('vadimgb1', 'Harry', 'Potter', 'James', 'vadimgb1@gmail.com', 2);`
 		
 		pool.query(sql1, (err, result) => {
 			if(err) console.log(err)

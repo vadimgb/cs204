@@ -1,0 +1,43 @@
+<%- include('../partials/head.ejs') %>
+<title>Оценки</title>
+<script src='javascripts/email/index.js' ></script>
+</head>
+<body>
+	<div class='container'>
+		<form id="form1">
+			<div class='row'>
+				<div class='col-sm-1'>
+					<select autocomplete='off' id='houseSelect' name = 'id_house' required >
+						<option  selected disabled value=''>Выберите группу</option>
+							<% for(let row of houses){%>
+								<option value=<%= row.id %> ><%= row.house %></option>
+							<%}%>
+					</select>
+				</div>
+			</div>
+
+			<div class='row mt-3'>
+				<h2>Письмо</h2>
+				<label for="subject">Тема</label>
+				<input id="subject" name="subject"  required >
+			</div>
+
+			<div class='row mt-3'>
+				<label for="message">Сообщение</label>
+				<textarea class='form-control' id="message" name="message"> </textarea>
+			</div>
+			<div class='row mt-3'>
+				<div class='col col-sm-3'>
+					<button id="send" type="button" class='btn btn-primary' >Отправить</button>
+				</div>
+			</div>
+		<form>
+		<a href = "/teacher/dashboard">Дашборд</a>
+		<div class='row' id="resMsg">
+		</div>
+			
+	</div>
+
+</body>
+</html>
+

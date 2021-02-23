@@ -59,7 +59,9 @@ pm2 unstartup
 192.168.1.1
 access->virtual server
  
-
+## debian disable/enable graphics
+sudo systemctl set-default multi-user
+sudo systemctl set-default graphical
 
 
 
