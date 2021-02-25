@@ -2,10 +2,8 @@ const {pool} = require('../models/pgConfig')
 const fetch = require('node-fetch')
 
 const client_id = process.env.GITHUB_CLIENT_ID 
-console.log('---------------client_id=',client_id)
 const client_secret = process.env.GITHUB_CLIENT_SECRET
 const host=process.env.HOST
-console.log('-------------client_secret=', client_secret)
 const PORT = process.env.PORT || 8000
 
 //1. Request a user's GitHub identity
@@ -21,10 +19,8 @@ exports.index = async (req, res) =>
 exports.callback = async (req, res) => 
 {
 	const code = req.query.code // take code from request
-	console.log('----------code =', code)
 	const token = await getAccessToken(code)//change code on access token
 	const username = await getGithubUser(token)//use token to access api
-	console.log('-------------token = ', token)
 	const email = await getUserEmail(token)
 	if(username)
 	{

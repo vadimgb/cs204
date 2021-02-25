@@ -1,4 +1,4 @@
 require('dotenv').config()
-const {deleteRepo} = require('./helper.js')
 
-deleteRepo(process.env.TSPU_TOKEN, 'vadimgb1')
+console.log(process.env.EMAIL_PASSWORD)
+console.log(process.env.EMAIL_USER)

@@ -27,34 +27,40 @@ exports.api_email = async (req, res) =>
 		})
 
 	let taskCounter = result.rows.length
-
-	for(const user of result.rows)
+	transport.verify(async (error, success) =>
 	{
-		const messageAll = { 
-			from : process.env.EMAIL_SENDER, 
-			to: user.email, 
-			subject: subject, 
-			text: `Здравствуйте, ${user.firstname} ${user.surname}. ${message}` 
-		}
+		if(error) console.log(error)
+		else{
+			for(const user of result.rows)
+			{
+				const messageAll = { 
+					from : process.env.EMAIL_SENDER, 
+					to: user.email, 
+					subject: subject, 
+					text: `Здравствуйте, ${user.firstname} ${user.surname}. ${message}` 
+				}
 
-		await transport.sendMail(messageAll, (err, info) => 
-			{ 
-				if(err)
-				{
-					errors.push(err)
-				}
-				else
-				{
-					infos.push(info)
-				}
-				taskCounter--
-				if(taskCounter == 0) {
-					transport.close()
-					const msg = {'errors':errors, 'infos': infos}
-					res.send(JSON.stringify(msg))
-				}
-			})
-	}
+				await transport.sendMail(messageAll, (err, info) => 
+					{ 
+						if(err)
+						{
+							errors.push(err)
+						}
+						else
+						{
+							infos.push(info)
+						}
+						taskCounter--
+						if(taskCounter == 0) {
+							transport.close()
+							const msg = {'errors':errors, 'infos': infos}
+							res.send(JSON.stringify(msg))
+						} 
+					}) 
+			}
+		}
+	})
+
 }
 
 
