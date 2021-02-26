@@ -94,7 +94,6 @@ exports.sendEmail = async function(email_to, firstname, surname, subject, messag
 	await transport.sendMail(messageAll, (err, info) => 
 		{ 
 			transport.close() 
-			res.send(JSON.stringify('ok')) 
 		}
 	) 
 }
