@@ -1,4 +1,5 @@
 const {pool} = require('../models/pgConfig')
+const {sendEmail } =require('../helper.js')
 
 exports.index = async (req, res) =>
 {
@@ -44,6 +45,15 @@ exports.api_addGradeToDb = async (req, res) =>
 	{
 		console.log('cant change grade', err)
 	}
+	const sql2 = `select firstname, surname, email from characters where id = $1;`
+	const result2 = await pool.query(sql2, [id_character])
+	const email_to = result2.rows[0].email
+	const firstname = result2.rows[0].firstname
+	const surname = result2.rows[0].surname
+	const subject = `Задание pset${id_problemset}`
+	const message = `Задание pset${id_problemset} проверено.
+	Смотрите результаты на http://${process.env.HOST} .`
+	sendEmail(email_to, firstname, surname, subject, message)
 }
 
 exports.api_addNotesToDb = async (req, res) =>

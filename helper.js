@@ -1,4 +1,6 @@
 const fetch = require('node-fetch')
+const nodemailer = require('nodemailer')
+require('dotenv').config()
 
 exports.redirectLoginTeacher = function (req, res, next)
 {
@@ -73,6 +75,31 @@ exports.deleteRepo = async function(org_token, name)
 	}
 }
 
+exports.sendEmail = async function(email_to, firstname, surname, subject, message)
+{
+	const transport = nodemailer.createTransport({ 
+			host: process.env.SMTP_SERVER, 
+			port: process.env.SMTP_PORT, 
+			auth: { 
+				user: process.env.EMAIL_USER, 
+				pass: process.env.EMAIL_PASSWORD 
+			}
+		})
+	const messageAll = { 
+					from : process.env.EMAIL_SENDER, 
+					to: email_to, 
+					subject: subject, 
+					text: `Здравствуйте, ${firstname} ${surname}. ${message}` 
+				} 
+	await transport.sendMail(messageAll, (err, info) => 
+		{ 
+			transport.close() 
+			res.send(JSON.stringify('ok')) 
+		}
+	) 
+}
+
+
 //--------------
 //
 async function haveRepo(token, user)
@@ -121,5 +148,6 @@ async function addCollaborator(org_token, name)
 			}	
 		})
 }
+
 
 
