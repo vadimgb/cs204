@@ -13,6 +13,8 @@ exports.api_email = async (req, res) =>
 	const id_house = req.body.id_house
 	const message = req.body.message
 	const subject = req.body.subject
+	const sql1 = `insert into emails (id_house, subject, message) values ($1, $2, $3);`
+	await pool.query(sql1, [id_house, subject, message])
 	const sql = `select firstname, surname, email from characters where id_house = $1;`
 	const result = await pool.query(sql, [id_house])
 	const errors = []

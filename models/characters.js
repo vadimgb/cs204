@@ -12,6 +12,7 @@ let taskCounter = 0
 		drop table if exists characters; 
 		drop table if exists houses; 
 		drop table if exists education_type;
+		drop table if exists emails;
 		
 		create table education_type(id serial primary key, name text);
 
@@ -31,6 +32,7 @@ let taskCounter = 0
 		id_problemset int references problemset(id), grade int, notes text, 
 		is_done boolean, is_checked boolean, url text, timestamp_done timestamp,
 		primary key(id_character, id_problemset)); 
+		create table emails (id serial primary key, id_house int references houses(id), subject text, message text); 
 
 
 		insert into education_type (name) values ('очная'), ('заочная'), ('дистанционная'), ('самостоятельная');
