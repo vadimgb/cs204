@@ -67,6 +67,28 @@ sudo systemctl set-default graphical
 
 
 
+## создание проверки
+git clone https://github.com/cs204/psets/ -b 21
+cd psets
+mkdir example
+cd example
+//----------------
+vim .cs50.yaml
+check50:
+	checks:
+		search:
+			- run: node test.js
+			  shdout: |
+				hello
+				world
+			  exit: 0
+:wq
+//------------------
+В директории запускаем тест
+check50 --dev ~/psets/example
+
+cd ~/psets
+git push origin 2021
 
 
 
