@@ -19,11 +19,12 @@ exports.redirectLogin = function (req, res, next)
 
 }
 
-exports.createRepo = async function(org_token, token, name)
+exports.createRepo = async function(org_name, org_token, token, name)
 {
-	const haveR = await haveRepo(token, name)
+	const haveR = await orgHaveRepo(org_name, org_token, name)
+
 	if(haveR)
-		console.log('User have repository')
+		console.log('Org have repository')
 	else
 	{
 		const body = {
@@ -34,7 +35,7 @@ exports.createRepo = async function(org_token, token, name)
 				'auto_init': true
 				}
 
-		const url1 ="https://api.github.com/orgs/cs204/repos"
+		const url1 =`https://api.github.com/orgs/${org_name}/repos`
 		await fetch(url1,
 			{
 				method: 'post',
@@ -44,16 +45,16 @@ exports.createRepo = async function(org_token, token, name)
 					"Authorization":`token ${org_token}`
 				}	
 			})
-		await addCollaborator(org_token, name)
+		await addCollaborator(org_name, org_token, name)
 	}
 }
 
-exports.deleteRepo = async function(org_token, name)
+exports.deleteRepo = async function(org_name, org_token, name)
 {
-	const haveR = await orgHaveRepo(org_token, name)
+	const haveR = await orgHaveRepo(org_name, org_token, name)
 	if(haveR)
 	{
-		const url1 = `https://api.github.com/repos/cs204/${name}`
+		const url1 = `https://api.github.com/repos/${org_name}/${name}`
 		try
 		{
 			console.log(url1)
@@ -101,43 +102,27 @@ exports.sendEmail = async function(email_to, firstname, surname, subject, messag
 
 //--------------
 //
-async function haveRepo(token, user)
-{
-	let haveR = false
-	const res = await fetch("https://api.github.com/user/repos",
-	{
-		headers:
-		{ 
-			"Authorization": `token ${token}`
-		}
-	})
-	const repos = await res.json()
-	for(let repo of repos)
-		if(repo.full_name == `cs204/${user}`)
-			haveR = true
-	return haveR
-}
 
-async function orgHaveRepo(token, username)
+async function orgHaveRepo(org_name,  token, username)
 {
-	let haveR = false
-	const res = await fetch("https://api.github.com/orgs/cs204/repos",
+	const url1 = `https://api.github.com/repos/${org_name}/${username}`;
+	const res = await fetch(url1, 
 		{
+			method: "get",
 			headers:
 			{
+				"Accept": "application/vnd.github.v3+json",
 				"Authorization": `token ${token}`
 			}
 		})
-	const repos = await res.json()
-	for(let repo of repos)
-		if(repo.name == username)
-			haveR = true
-	return haveR
+
+	return res.status == 200;
 }
 
-async function addCollaborator(org_token, name)
+
+async function addCollaborator(org_name, org_token, name)
 {
-	const url1 = `https://api.github.com/repos/cs204/${name}/collaborators/${name}`
+	const url1 = `https://api.github.com/repos/${org_name}/${name}/collaborators/${name}`
 	const res = await fetch(url1,
 		{
 			method:'put', 

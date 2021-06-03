@@ -1,5 +1,5 @@
 const {pool} = require('../models/pgConfig')
-const {createRepo, } =require('../helper.js')
+const {createRepo} =require('../helper.js')
 
 exports.index = async (req, res)=>
 	{
@@ -17,7 +17,8 @@ exports.index = async (req, res)=>
 
 exports.register =  async (req, res)=>
 	{
-		await createRepo(process.env.TSPU_TOKEN, req.session.token, req.session.username)
+		await createRepo('cs204', process.env.TSPU_TOKEN, req.session.token, req.session.username)
+		await createRepo('cs204check', process.env.TSPU_TOKEN, req.session.token, req.session.username)
 		const {firstname, lastname, surname, id_house} = req.body
 		req.session.id_house = id_house
 		const sql1 = `insert into characters (username, lastname, firstname, surname, email, id_house)

@@ -1,5 +1,5 @@
 const {pool} = require('../models/pgConfig')
-const {createRepo, deleteRepo} =require('../helper.js')
+const {deleteRepo} =require('../helper.js')
 
 exports.index = async (req, res) =>
 {
@@ -56,7 +56,8 @@ exports.api_delete = async (req, res) =>
 	{
 		for(let i = 0; i < usernames.rows.length; i++)
 		{ 
-			deleteRepo(process.env.TSPU_TOKEN, usernames.rows[i]['username'])
+			deleteRepo('cs204', process.env.TSPU_TOKEN, usernames.rows[i]['username'])
+			deleteRepo('cs204check', process.env.TSPU_TOKEN,  usernames.rows[i]['username'])
 		}
 	}
 	await pool.query(sql2)		
