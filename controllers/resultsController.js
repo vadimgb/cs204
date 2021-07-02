@@ -57,7 +57,6 @@ exports.api_delete = async (req, res) =>
 		for(let i = 0; i < usernames.rows.length; i++)
 		{ 
 			deleteRepo('cs204', process.env.TSPU_TOKEN, usernames.rows[i]['username'])
-			deleteRepo('cs204check', process.env.TSPU_TOKEN,  usernames.rows[i]['username'])
 		}
 	}
 	await pool.query(sql2)		
