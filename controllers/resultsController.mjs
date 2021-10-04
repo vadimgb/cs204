@@ -1,7 +1,7 @@
-const {pool} = require('../models/pgConfig')
-const {deleteRepo} =require('../helper.js')
+import {pool} from '../models/pgConfig.mjs'
+import {deleteRepo} from '../helper.mjs'
 
-exports.index = async (req, res) =>
+async function index(req, res) 
 {
 	const request = await pool.query('select * from houses where id <> 1 and is_active = true;')
 	res.render('results/index.ejs', {houses: request.rows})
@@ -9,7 +9,7 @@ exports.index = async (req, res) =>
 
 
 
-exports.api_grades = async (req, res) =>
+async function api_grades(req, res) 
 {
 	const id_house = req.body.id_house
 	const result = {}
@@ -43,7 +43,7 @@ exports.api_grades = async (req, res) =>
 	res.send(JSON.stringify(result))
 }
 
-exports.api_delete = async (req, res) =>
+async function api_delete(req, res)
 {
 	const remove_list = req.body.remove_list
 	try
@@ -56,8 +56,7 @@ exports.api_delete = async (req, res) =>
 	{
 		for(let i = 0; i < usernames.rows.length; i++)
 		{ 
-			deleteRepo('cs204', process.env.TSPU_TOKEN, usernames.rows[i]['username'])
-			deleteRepo('cs204check', process.env.TSPU_TOKEN,  usernames.rows[i]['username'])
+			deleteRepo(process.env.ORGANIZATION, process.env.TSPU_TOKEN, usernames.rows[i]['username'])
 		}
 	}
 	await pool.query(sql2)		
@@ -69,3 +68,6 @@ exports.api_delete = async (req, res) =>
 		console.log(err)
 	}
 }
+
+
+export {index, api_grades, api_delete}

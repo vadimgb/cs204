@@ -1,11 +1,11 @@
-const {pool} = require('../models/pgConfig')
+import {pool} from '../models/pgConfig.mjs'
 
-exports.index = async (req, res) =>
+async function index(req, res) 
 {
 	res.render('pending/index.ejs')
 }
 
-exports.api_grades = async (req, res) =>
+async function api_grades(req, res) 
 {
 	const sql1 = `select select1.firstname, select1.lastname, select1.house, select1.is_active, 
 		gradebook.grade, gradebook.url, gradebook.notes, 
@@ -19,4 +19,4 @@ exports.api_grades = async (req, res) =>
 }
 
 
-
+export {index, api_grades}

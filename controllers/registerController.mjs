@@ -1,7 +1,10 @@
-const {pool} = require('../models/pgConfig')
-const {createRepo} =require('../helper.js')
+import {pool}  from '../models/pgConfig.mjs'
+import {createRepo} from '../helper.mjs'
 
-exports.index = async (req, res)=>
+import dotenv from 'dotenv'
+dotenv.config()
+
+async function index(req, res)
 	{
 		const sql1 = `select id, house from houses where id <> 1 and is_active = true;`
 		pool.query(sql1, (err, res1)=>
@@ -15,10 +18,9 @@ exports.index = async (req, res)=>
 			})
 	}
 
-exports.register =  async (req, res)=>
+async function register(req, res)
 	{
-		await createRepo('cs204', process.env.TSPU_TOKEN, req.session.token, req.session.username)
-		await createRepo('cs204check', process.env.TSPU_TOKEN, req.session.token, req.session.username)
+		await createRepo(process.env.ORGANIZATION, process.env.TSPU_TOKEN,  req.session.username)
 		const {firstname, lastname, surname, id_house} = req.body
 		req.session.id_house = id_house
 		const sql1 = `insert into characters (username, lastname, firstname, surname, email, id_house)
@@ -45,4 +47,4 @@ exports.register =  async (req, res)=>
 	}
 		
 
-
+export {index, register}

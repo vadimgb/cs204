@@ -1,14 +1,16 @@
-const nodemailer = require('nodemailer')
-require('dotenv').config()
-const {pool} = require('../models/pgConfig')
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
 
-exports.index = async (req, res) =>
+import {pool} from '../models/pgConfig.mjs'
+
+async function index(req, res) 
 {
 	const request = await pool.query(`select * from houses where house <> 'Teacher' and is_active = true;`)
 	res.render('email/index.ejs', {houses: request.rows})
 }
 
-exports.api_email = async (req, res) =>
+async function  api_email(req, res) 
 {
 	const id_house = req.body.id_house
 	const message = req.body.message
@@ -68,4 +70,4 @@ exports.api_email = async (req, res) =>
 
 
 
-
+export {index, api_email}

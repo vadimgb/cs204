@@ -1,5 +1,5 @@
-const {pool} = require('../models/pgConfig')
-const fetch = require('node-fetch')
+import {pool} from '../models/pgConfig.mjs'
+import fetch from  'node-fetch'
 
 const client_id = process.env.GITHUB_CLIENT_ID 
 const client_secret = process.env.GITHUB_CLIENT_SECRET
@@ -7,7 +7,7 @@ const host=process.env.HOST
 const PORT = process.env.PORT || 8000
 
 //1. Request a user's GitHub identity
-exports.index = async (req, res) =>
+async function index(req, res) 
 {
 	//В адресе не нужен порт на heroku 
 	const url = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://${host}/login/github/callback`
@@ -16,7 +16,7 @@ exports.index = async (req, res) =>
 
 //2. User are redirected back with temporary code (10 minutes).  Exchange code for access token.
 //3. Use token to access api
-exports.callback = async (req, res) => 
+async function callback(req, res) 
 {
 	const code = req.query.code // take code from request
 	const token = await getAccessToken(code)//change code on access token
@@ -100,4 +100,4 @@ async function getUserEmail(token)
 	return data[0]['email']
 }
 
-
+export {index, callback}

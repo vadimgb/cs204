@@ -1,11 +1,12 @@
 <%- include('../partials/head.ejs') %>
-<title>Задание <%=id_pset %></title>
+<title>Задание <%=branch %>/<%=name_pset %></title>
 </head>
 <body>
 <div class='container'>
-	<h1>Отчёт по выполнению задания</h1>
+	<h1>Отчёт по выполнению задания <%=branch %>/<%=name_pset %></h1>
 	<form action='/character/api_pset' method='post'>
-		<input type='hidden' value='<%= id_pset %>' name='id_problemset'> 
+		<input type='hidden' value='<%= name_pset %>' name='name_problemset'> 
+		<input type='hidden' value='<%= branch %>' name='branch'> 
 		<input type='hidden' value='<%= type %>' name='type'> 
 		<div class='mb-3'>
 			<label for='login' class='form-label'>Укажите GitHub username</label>

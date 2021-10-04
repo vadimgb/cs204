@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
 
 const tspu_token = process.env.TSPU_TOKEN
 const PORT = process.env.PORT || 8000
 
-var app = require('../app')
+import {app} from '../app.mjs'
 
 
 app.listen(PORT, ()=>console.log(`listen PORT:${PORT}`))

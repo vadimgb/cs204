@@ -1,27 +1,29 @@
-const {pool} = require('../models/pgConfig')
+import {pool} from '../models/pgConfig.mjs'
 
-exports.list = (req, res) =>
+function list(req, res) 
 {
 	res.render('problemset/pset.ejs')
 }
 
 
-exports.api_list = async (req, res) =>
+async function api_list(req, res) 
 {
 	const problemset = await pool.query('select * from problemset;')
 	res.end(JSON.stringify(problemset.rows))
 }
 
-exports.api_add = async (req, res) =>
+async function api_add(req, res)
 {
 	await pool.query(`insert into problemset (name) values ($1)`, [req.body.name])
 	res.end('ok')
 }
 
-exports.api_delete = async (req, res) =>
+async function api_delete(req, res)
 {
 	const remove_list = req.body.remove_list
 	const sql = `delete from problemset where id in (${remove_list})`
 	await pool.query(sql)
 	res.end('Ok')
 }
+
+export {list, api_list, api_add, api_delete}

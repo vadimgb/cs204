@@ -1,8 +1,9 @@
-const fetch = require('node-fetch')
-const nodemailer = require('nodemailer')
-require('dotenv').config()
+import fetch from 'node-fetch'
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
 
-exports.redirectLoginTeacher = function (req, res, next)
+function redirectLoginTeacher(req, res, next)
 {
 	if(!req.session.usenrname && req.session.id_house != 1)
 		res.send('Only Teacher may be hear')
@@ -10,7 +11,7 @@ exports.redirectLoginTeacher = function (req, res, next)
 		next()
 }
 
-exports.redirectLogin = function (req, res, next)
+function redirectLogin(req, res, next)
 {
 	if(!req.session.username)
 		res.redirect('/')
@@ -19,7 +20,7 @@ exports.redirectLogin = function (req, res, next)
 
 }
 
-exports.createRepo = async function(org_name, org_token, token, name)
+async function createRepo(org_name, org_token,  name)
 {
 	const haveR = await orgHaveRepo(org_name, org_token, name)
 
@@ -49,7 +50,7 @@ exports.createRepo = async function(org_name, org_token, token, name)
 	}
 }
 
-exports.deleteRepo = async function(org_name, org_token, name)
+async function deleteRepo(org_name, org_token, name)
 {
 	const haveR = await orgHaveRepo(org_name, org_token, name)
 	if(haveR)
@@ -76,7 +77,7 @@ exports.deleteRepo = async function(org_name, org_token, name)
 	}
 }
 
-exports.sendEmail = async function(email_to, firstname, surname, subject, message)
+async function sendEmail(email_to, firstname, surname, subject, message)
 {
 	const transport = nodemailer.createTransport({ 
 			host: process.env.SMTP_SERVER, 
@@ -134,4 +135,4 @@ async function addCollaborator(org_name, org_token, name)
 }
 
 
-
+export {redirectLoginTeacher, redirectLogin, createRepo, deleteRepo, sendEmail, orgHaveRepo}
