@@ -1,6 +1,6 @@
 import {pool} from '../models/pgConfig.mjs'
 import util from 'util';
-import urlExists from 'url-exists'
+import urlExist from 'url-exist'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -44,7 +44,7 @@ exports.api_pset = async (req, res) =>
 			url = `https://github.com/cs204/${username}/tree/pset${id_problemset}`
 		}
 		
-		const url_exists = await urlExists(url);
+		const url_exist = await urlExist(url);
 		try
 		{
 			const res1 = await pool.query(`select * from characters where username = $1;`,[username]);
@@ -52,7 +52,7 @@ exports.api_pset = async (req, res) =>
 			{
 				res.send('Нет пользователя с таким именем. User with such name does not exist');
 			}
-			else if(!url_exists)
+			else if(!url_exist)
 			{
 				res.send('Неправильный адрес url. Wrong url')
 			}
@@ -87,7 +87,7 @@ async function api_pset(req, res)
 			url = `https://github.com/${process.env.ORGANIZATION}/${username}/tree/${branch}/${name_problemset}`
 		}
 		
-		const url_exists = await urlExists(url);
+		const url_exist = await urlExist(url);
 		try
 		{
 			const res1 = await pool.query(`select * from characters where username = $1;`,[username]);
@@ -101,7 +101,7 @@ async function api_pset(req, res)
 			{
 				res.send('Нет пользователя с таким именем. User with such name does not exist');
 			}
-			else if(!url_exists)
+			else if(!url_exist)
 			{
 				res.send('Неправильный адрес url. Wrong url')
 			}
