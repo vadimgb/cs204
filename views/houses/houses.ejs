@@ -1,0 +1,20 @@
+<%- include('../partials/head.ejs') %>
+<script src="javascripts/houses/houses.js"> 
+</script>
+</head>
+<body>
+	<div class="container">
+	<h2>Группы</h2>
+		<table class='table' id='housesTable'>
+		</table>
+		<input id = 'deleteForm' type='button' value='Удалить выбранное'>
+
+	<h2>Добавить</h2>
+		<input id="houseInput" placeholder="Группа" required >
+		<input id="addForm" type="button" value="Добавить">
+
+	<br>
+	<a href="/teacher/dashboard">Дашборд</a>
+	</div>
+</body>
+</html>

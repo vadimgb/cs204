@@ -1,8 +1,10 @@
-const {pool} = require('../models/pgConfig')
-const util = require('util');
-const urlExists = util.promisify(require('url-exists'));
+import {pool} from '../models/pgConfig.mjs'
+import util from 'util';
+import urlExists from 'url-exists'
+import dotenv from 'dotenv'
+dotenv.config()
 
-exports.gradebook = async function (req, res)
+async function gradebook(req, res)
 {
 	try
 	{
@@ -22,7 +24,7 @@ exports.gradebook = async function (req, res)
 	}
 }
 
-exports.pset = async function(req, res)
+async function pset(req, res)
 {
 	res.render('character/pset.ejs',{branch: req.params.branch, name_pset: req.params.name_pset, type: req.params.type})
 }
@@ -76,13 +78,13 @@ exports.api_pset = async (req, res) =>
 	}
 */
 
-exports.api_pset = async (req, res) =>
+async function api_pset(req, res) 
 	{
 		let {url, branch, name_problemset, username, type} = req.body
 		const timestamp1 = new Date()
 		if(type != 'v')
 		{
-			url = `https://github.com/cs204/${username}/tree/${branch}/${name_problemset}`
+			url = `https://github.com/${process.env.ORGANIZATION}/${username}/tree/${branch}/${name_problemset}`
 		}
 		
 		const url_exists = await urlExists(url);
@@ -124,4 +126,4 @@ exports.api_pset = async (req, res) =>
 		}
 	}
 
-
+export {gradebook, pset, api_pset}

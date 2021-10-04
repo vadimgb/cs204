@@ -39,9 +39,9 @@ let taskCounter = 0
 
 		insert into houses (house, is_active, id_education_type) values  ('Teacher', false, 1); 
 
-		insert into houses (house, is_active, id_education_type) values   ('204', true, 1),
-		('206', true, 1), ('207', true, 1), ('301', true, 1), ('302', true, 1), 
-		('303', true, 1), ('304', true, 1), ('795', true, 1); 
+		insert into houses (house, is_active, id_education_type) values   ('211', true, 1),
+		('212', true, 1), ('213', true, 1), ('214', true, 1), ('217', true, 1), 
+		('219', true, 1), ('113', true, 1), ('114', true, 1); 
 
 		insert into problemset (name) values 
 		('Зачёт'),

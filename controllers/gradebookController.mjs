@@ -1,13 +1,13 @@
-const {pool} = require('../models/pgConfig')
-const {sendEmail } =require('../helper.js')
+import {pool} from '../models/pgConfig.mjs'
+import {sendEmail } from '../helper.mjs'
 
-exports.index = async (req, res) =>
+async function index(req, res) 
 {
 	const request = await pool.query(`select * from houses where house <> 'Teacher' and is_active = true;`)
 	res.render('gradebook/index.ejs', {houses: request.rows})
 }
 
-exports.api_pset = async (req, res) =>
+async function api_pset(req, res) 
 {
 	const id_house = req.body.id_house
 	const sql = `select name, id from problemset 
@@ -17,7 +17,7 @@ exports.api_pset = async (req, res) =>
 	res.send(JSON.stringify(result.rows))
 }
 
-exports.api_grades = async (req, res) =>
+async function api_grades(req, res) 
 {
 	const id_pset = req.body.id_pset 
 	const id_house = req.body.id_house
@@ -30,7 +30,7 @@ exports.api_grades = async (req, res) =>
 	res.send(JSON.stringify(result.rows))
 }
 
-exports.api_addGradeToDb = async (req, res) =>
+async function api_addGradeToDb(req, res) 
 {
 	const id_character = req.body.id_character
 	const id_problemset = req.body.id_problemset
@@ -56,7 +56,7 @@ exports.api_addGradeToDb = async (req, res) =>
 	sendEmail(email_to, firstname, surname, subject, message)
 }
 
-exports.api_addNotesToDb = async (req, res) =>
+async function api_addNotesToDb(req, res) 
 {
 	const id_character = req.body.id_character
 	const id_problemset = req.body.id_problemset
@@ -72,4 +72,4 @@ exports.api_addNotesToDb = async (req, res) =>
 	}
 }
 
-
+export {index, api_pset, api_grades, api_addGradeToDb, api_addNotesToDb}
