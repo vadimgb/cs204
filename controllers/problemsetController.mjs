@@ -21,7 +21,9 @@ async function api_add(req, res)
 async function api_delete(req, res)
 {
 	const remove_list = req.body.remove_list
-	const sql = `delete from problemset where id in (${remove_list})`
+	const sql = `delete from gradebook where id_problemset in (${remove_list});
+	delete from plan where id_problemset in (${remove_list});
+	delete from problemset where id in (${remove_list})`
 	await pool.query(sql)
 	res.end('Ok')
 }
