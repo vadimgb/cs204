@@ -21,6 +21,7 @@
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
+    "url-exist": "^3.0.0",
     "url-exists": "^1.0.3",
     "utils": "^0.3.1"
   }
