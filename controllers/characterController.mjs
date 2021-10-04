@@ -54,7 +54,7 @@ exports.api_pset = async (req, res) =>
 			}
 			else if(!url_exist)
 			{
-				res.send('Неправильный адрес url. Wrong url')
+				res.send(`Неправильный адрес url. Wrong url ${url}`)
 			}
 			else
 			{
@@ -85,6 +85,7 @@ async function api_pset(req, res)
 		if(type != 'v')
 		{
 			url = `https://github.com/${process.env.ORGANIZATION}/${username}/tree/${branch}/${name_problemset}`
+
 		}
 		
 		const url_exist = await urlExist(url);
