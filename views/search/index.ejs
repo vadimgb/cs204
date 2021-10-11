@@ -1,0 +1,25 @@
+<%- include('../partials/head.ejs') %>
+<title>Поиск</title>
+<script src='javascripts/search/index.js' ></script>
+</head>
+<body>
+	<div class='container'>
+		<select autocomplete='off' id='houseSelect' name = 'id_house'>
+			<option  selected disabled value=''>Выберите группу</option>
+				<% for(let row of houses){%>
+					<option value=<%= row.id %> ><%= row.house %></option>
+				<%}%>
+		</select>
+		<input type='text' name='emailSelect' id='emailSelect' size=20 placeholder='email'>
+		<input type='text' name='lastnameSelect' id='lastnameSelect' size=20 placeholder='Фамилия'>
+		<br>
+		<input type='button' id='searchBtn' value="Найти"> 
+		<br>
+		<table class='table' id='searchTable'>
+		</table>
+		<a href = "/teacher/dashboard">Дашборд</a>
+	
+	</div>
+</body>	
+</html>
+

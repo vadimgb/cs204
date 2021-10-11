@@ -43,6 +43,7 @@ import {router as planRouter} from './routes/plan.mjs'
 import {router as emailRouter} from './routes/email.mjs'
 import {router as pendingRouter} from './routes/pending.mjs'
 import {router as housesRouter} from './routes/houses.mjs'
+import {router as searchRouter} from './routes/search.mjs'
 
 app.use('/', indexRouter)
 app.use('/login/github', loginRouter)
@@ -56,6 +57,7 @@ app.use('/plan', planRouter)
 app.use('/email', emailRouter)
 app.use('/pending', pendingRouter)
 app.use('/houses', housesRouter)
+app.use('/search', searchRouter)
 
 export {app}
 
