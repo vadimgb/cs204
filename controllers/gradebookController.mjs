@@ -47,11 +47,13 @@ async function api_addGradeToDb(req, res)
 	}
 	const sql2 = `select firstname, surname, email from characters where id = $1;`
 	const result2 = await pool.query(sql2, [id_character])
+	const sql3 = `select name from problemset where id = $1;`
+	const result3 = await pool.query(sql3, [id_problemset])
 	const email_to = result2.rows[0].email
 	const firstname = result2.rows[0].firstname
 	const surname = result2.rows[0].surname
-	const subject = `Задание pset${id_problemset}`
-	const message = `Задание pset${id_problemset} проверено.
+	const subject = `Задание ${result3.rows[0].name}`
+	const message = `Задание ${result3.rows[0].name} проверено.
 	Смотрите результаты на http://${process.env.HOST} .`
 	sendEmail(email_to, firstname, surname, subject, message)
 }
