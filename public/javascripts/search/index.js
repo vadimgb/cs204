@@ -22,10 +22,12 @@ async function search_rows()
 		let cellLastName = row.insertCell()
 		let cellFirstName = row.insertCell() 
 		let cellEmail = row.insertCell() 
+		let cellUsername = row.insertCell()
 		let cellHouse = row.insertCell() 
 		cellLastName.innerHTML = characters[i].lastname
 		cellFirstName.innerHTML = characters[i].firstname 
 		cellEmail.innerHTML = `<input value='${characters[i].email}' size=25 onchange='addEmailToDb(this.value, ${characters[i].id})'>`;
+		cellUsername.innerHTML = characters[i].username
 		cellHouse.innerHTML = characters[i].house
 	}
 

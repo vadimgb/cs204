@@ -13,13 +13,13 @@ async function api_search(req, res)
 	const lastnameSelect = req.body.lastnameSelect
 
 
-	const sql_house = `select characters.id, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where houses.id=$1;`
+	const sql_house = `select characters.id, username, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where houses.id=$1;`
 
-	const sql_email = `select characters.id, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where email=$1;`
+	const sql_email = `select characters.id, username, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where email=$1;`
 
-	const sql_lastname = `select characters.id, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where lastname=$1;`
+	const sql_lastname = `select characters.id, username, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where lastname=$1;`
 
-	const sql_wrong_mail = `select characters.id, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where email like '%users%';`
+	const sql_wrong_mail = `select characters.id, username, lastname, firstname, email, houses.house from (characters join houses on characters.id_house = houses.id) where email like '%users%';`
 	
 	let characters;
 
