@@ -35,7 +35,7 @@ async function grades_rows()
 			}
 			else
 			{ 
-				cellGrade.innerHTML = grades[i].grades[problem['id_problemset']];
+				cellGrade.innerHTML = `<div title=${problem['name']}>${grades[i].grades[problem['id_problemset']]}</div>`;
 			}
 		}
 		
