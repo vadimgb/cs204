@@ -20,6 +20,15 @@ async function index(req, res)
 
 async function register(req, res)
 	{
+		const res1 = await pool.query(`select * from characters where username = $1`, [req.session.username])
+		if(res1.rows.length > 0)
+		{
+			res.redirect('/character/gradebook')
+		}
+		else
+		{
+		
+
 		await createRepo(process.env.ORGANIZATION, process.env.TSPU_TOKEN,  req.session.username)
 		const {firstname, lastname, surname, id_house} = req.body
 		req.session.id_house = id_house
@@ -42,6 +51,7 @@ async function register(req, res)
 		{ 
 			res.send('Ошибка  добавления данных в базу. Error in registering')
 			console.log("Ошибка, добавления данных в базу. Error in registering", err)
+		}
 		}
 
 	}
