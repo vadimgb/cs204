@@ -1,3 +1,8 @@
+#Тестирование
+sudo ufw disable
+npm run strat
+http://localhost:8000
+
 # Динамический веб сайт для студента и преподавателя
 
 ##Регистрация
@@ -10,22 +15,31 @@ https://gihtub.com/cs204/{check_username.git}
 Туда пользователь будет отправлять свои задания.
 
 ##Отправка задания на проверку
-cd ~ - переходим в домашний каталог
-git clone https://github.com/cs204/{username}.git -b main pset{id_pset} - клонируем 
-git clone https://github.com/cs204/vadimgb1.git -b main pset2 - пример пользователь vadimgb1 задание 2 
-cd pset{id_pset} переходим в репозиторий
-cd pset2 - пример перехода в каталог для выполнения 2 задания 
-git checkout -b pset{id_pset}  
-делаем задание
-git add . все файлы добавляем 
-git commit -m "какое то пояснение" создаём коммит
-git push origin pset{id_pset} - отправляем на gihtub
+Проверка задания без отправки на github
+npx check204 2021/hello local 
+Проверка и отправка на github.
+npx check204 2021/hello 
+
+## создание проверки
+git clone https://github.com/cs204/psets/ -b 2021
+cd psets
+создаём файл hello.json. Содержимое файла ниже.
+{
+	"files":["hello.js"],
+	"output":"Hello, World!\n",
+	"run":"hello.js"
+}
+Отправляем обновлённые тесты
+git push origin 2021
+
+
+
 
 
 ##Страница для отправки результата на проверку
 https://cs204.herokuapp.com/character/pset/{id_pset}/{type}
-https://cs204.herokuapp.com/character/pset/2/v -пример для 2 задания форма отчёта скринкаст
-https://cs204.herokuapp.com/character/pset/2/c -пример для 2 задания форма отчёта код на github 
+https://cs204.herokuapp.com/character/pset/2021/website/v -пример для 2 задания форма адрес сайта. 
+https://cs204.herokuapp.com/character/pset/2021/hello/c -пример для 2 задания форма отчёта код на github 
 
 
 ## Структура папок MVC
@@ -68,28 +82,14 @@ sudo systemctl set-default graphical
 
 
 
-## создание проверки
-git clone https://github.com/cs204/psets/ -b 21
-cd psets
-mkdir example
-cd example
-//----------------
-vim .cs50.yaml
-check50:
-	checks:
-		search:
-			- run: node test.js
-			  shdout: |
-				hello
-				world
-			  exit: 0
-:wq
-//------------------
-В директории запускаем тест
-check50 --dev ~/psets/example
 
-cd ~/psets
-git push origin 2021
-
-
-
+//
+Тестирование изменений
+npm start
+90.188.117.161:8000
+отправка на github
+git add, git commit, git push origin develop
+обновление на vgb2
+ssh vadim@vgb2
+cd students/cs204
+git pull
