@@ -1,0 +1,33 @@
+ide.cs50.io
+sudo service postgresql start
+sudo service postgresql status
+sudo -u postgres psql
+create role user_one login;
+create user user_two password '12345';
+create role user_one login createdb password '12345';
+alter role user_one createdb;
+\du   посмотреть пользователей
+\d -посмотреть таблицы в базе
+\d students - посмотреть таблицу
+\l все базы данных
+\c students подключиться к базе
+drop database datbase_name;
+drop role user_one;
+psql -U user_one -d postgres -h localhost
+psql postgresql://vadim:password@localhost:5432/register
+
+create database students owner user_one;
+create table students (id_student serial primary key, firstName varchar(255) not null, lastName varchar(255) not null, id_group int references groups(id_group));
+
+create table groups (id_group int primary key, phone varchar(255));
+
+create table lessons
+
+insert into students (firstName, lastName, id_group) values('Иван', 'Иванов', 209), ('Лена', 'Кириолова', 203), ('Маша', 'Пудовкина', 209);
+
+insert into groups (id_group, phone) values (209, '382-2-66645');
+
+insert into groups (id_group, phone) values(203, '382-2-554455'); 
+insert into groups (id_group, phone) values(103, '382-2-445566');
+
+select * from students join groups on students.id_group = groups.id;

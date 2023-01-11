@@ -4,7 +4,6 @@ import fetch from  'node-fetch'
 const client_id = process.env.GITHUB_CLIENT_ID 
 const client_secret = process.env.GITHUB_CLIENT_SECRET
 const host=process.env.HOST
-const PORT = process.env.PORT || 8000
 
 //1. Request a user's GitHub identity
 async function index(req, res) 
