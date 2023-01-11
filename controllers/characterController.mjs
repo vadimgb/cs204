@@ -82,13 +82,16 @@ async function api_pset(req, res)
 	{
 		let {url, branch, name_problemset, username, type} = req.body
 		const timestamp1 = new Date()
-		if(type != 'v')
+		if(type == 'c')
 		{
 			url = `https://github.com/${process.env.ORGANIZATION}/${username}/tree/${branch}/${name_problemset}`
 
 		}
-		
-		const url_exist = await urlExist(url);
+
+		if(type != 'n')	//Провереяем адерс
+			const url_exist = await urlExist(url);
+		else
+			const url_exist = url;//не проверяем, dzen не проходит проверку.
 		try
 		{
 			const res1 = await pool.query(`select * from characters where username = $1;`,[username]);

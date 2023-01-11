@@ -1,6 +1,10 @@
-const {pool} = require('./pgConfig.js')
-const fs = require('fs')
-const csv = require('csv-parser') 
+import {pool} from '../models/pgConfig.mjs'
+//import * as fs from 'fs'; 
+//import {csv} from 'csv-parser';
+//const {pool} = require('./pgConfig.mjs')
+//const fs = require('fs')
+//const csv = require('csv-parser') 
+
 
 let taskCounter = 0
 
