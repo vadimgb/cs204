@@ -88,10 +88,13 @@ async function api_pset(req, res)
 
 		}
 
+		
+		var url_exist;
+
 		if(type != 'n')	//Провереяем адерс
-			const url_exist = await urlExist(url);
+			url_exist = await urlExist(url);
 		else
-			const url_exist = url;//не проверяем, dzen не проходит проверку.
+			url_exist = url;//не проверяем, dzen не проходит проверку.
 		try
 		{
 			const res1 = await pool.query(`select * from characters where username = $1;`,[username]);
