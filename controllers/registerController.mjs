@@ -45,6 +45,16 @@ async function register(req, res)
 				await pool.query(`insert into gradebook (id_character, id_problemset, is_done, grade, is_checked)
 					values ($1, $2, false, 0, false);`, [id_character, row.id_problemset])
 			}
+
+			const sql2 = `insert into presences 
+			(id_lecture, id_character)  
+			(select sl1.id_lecture, sl2.id_character from 
+			(select id as id_lecture from lectures 
+			where id_house = $1) as sl1 cross join 
+			(select id as id_character from characters 
+			where id=$2) as sl2);`
+			await pool.query(sql2, [id_house, id_character]);
+			
 			res.redirect('/character/gradebook')
 		}
 		catch(err)
