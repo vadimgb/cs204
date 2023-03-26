@@ -49,8 +49,9 @@ async function api_delete(req, res)
 	try
 	{
 	const sql =`select username from characters where id in (${remove_list});` 
-	const sql2 = `delete from gradebook where id_character in (${remove_list}); 
-			delete from characters where id in (${remove_list});`
+	const sql2 = `delete from gradebook where id_character in (${remove_list});
+	delete from presences where id_character in (${remove_list}); 
+	delete from characters where id in (${remove_list});`
 	const usernames = await pool.query(sql)
 	if(usernames.rows.length)
 	{

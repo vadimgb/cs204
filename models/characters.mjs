@@ -11,6 +11,9 @@ let taskCounter = 0
 ;(async ()=>
 	{
 		const sql1=`drop table if exists gradebook; 
+		drop table if exists presences;
+		drop table if exists lectures;
+		drop table if exists subjects;
 		drop table if exists plan;
 		drop table if exists problemset; 
 		drop table if exists characters; 
@@ -39,24 +42,32 @@ let taskCounter = 0
 		create table emails (id serial primary key, id_house int references houses(id), subject text, message text); 
 
 
+		create table subjects (id serial primary key, name text unique, description text default '');
+
+		create table lectures (
+			id serial primary key, 
+			id_subject int references subjects(id), 
+			id_house int references houses(id), 
+			date date default current_date, notes text default '');
+
+		create table presences (
+			id serial primary key,
+			id_lecture int references lectures(id),
+			id_character int references characters(id), 
+			is_present boolean default false,
+			constraint u_lecture_character unique (id_character, id_lecture)); 
+
 		insert into education_type (name) values ('очная'), ('заочная'), ('дистанционная'), ('самостоятельная');
 
 		insert into houses (house, is_active, id_education_type) values  ('Teacher', false, 1); 
 
-		insert into houses (house, is_active, id_education_type) values   ('211', true, 1),
-		('212', true, 1), ('213', true, 1), ('214', true, 1), ('217', true, 1), 
-		('219', true, 1), ('113', true, 1), ('114', true, 1); 
+		insert into houses (house, is_active, id_education_type) values   ('чужие', true, 1);
 
 		insert into problemset (name) values 
 		('Зачёт'),
-		('Экзамен'),
-		('Первая программа'), 
-		('Статический сайт'), 
-		('Github'),
-		('Задача о рюкзаке'), 
-		('Динамический сайт');
+		('Экзамен');
 
-		insert into characters (username, firstname, lastname, surname, email, id_house) values ('vadimgb', 'Vadim', 'Bulenok', 'Gennadievich', 'vadimgb@yandex.ru', 1), ('vadimgb1', 'Harry', 'Potter', 'James', 'vadimgb1@gmail.com', 2);`
+		insert into characters (username, firstname, lastname, surname, email, id_house) values ('vadimgb', 'Vadim', 'Bulenok', 'Gennadievich', 'vadimgb@yandex.ru', 1);`
 		
 		pool.query(sql1, (err, result) => {
 			if(err) console.log(err)

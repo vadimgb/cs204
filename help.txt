@@ -1,0 +1,4 @@
+select id from lectures where id_subject in (1, 2);
+
+controllers/subjectsController.mjs
+delete - до делать

@@ -45,6 +45,10 @@ import {router as pendingRouter} from './routes/pending.mjs'
 import {router as housesRouter} from './routes/houses.mjs'
 import {router as searchRouter} from './routes/search.mjs'
 
+import {router as subjectsRouter} from './routes/subjects.mjs'
+import {router as lecturesRouter}  from './routes/lectures.mjs'
+import {router as presencesRouter}  from './routes/presences.mjs'
+
 app.use('/', indexRouter)
 app.use('/login/github', loginRouter)
 app.use('/teacher',  teacherRouter)
@@ -59,6 +63,9 @@ app.use('/pending', pendingRouter)
 app.use('/houses', housesRouter)
 app.use('/search', searchRouter)
 
+app.use('/subjects', subjectsRouter)
+app.use('/lectures', lecturesRouter)
+app.use('/presences', presencesRouter)
 export {app}
 
 
