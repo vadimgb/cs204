@@ -13,7 +13,7 @@ async function api_grades(req, res)
 {
 	const id_house = req.body.id_house
 	const result = {}
-	const pset = await pool.query('select id_problemset, name from problemset join plan on id_problemset = problemset.id where id_house = $1;', [id_house])
+	const pset = await pool.query('select id_problemset, name, description from problemset join plan on id_problemset = problemset.id where id_house = $1;', [id_house])
 	result.pset = pset.rows
 	const gradebook = []
 	const characters = await pool.query('select id, firstname, lastname, surname from characters where id_house = $1 order by lastname;', [id_house])
@@ -26,10 +26,10 @@ async function api_grades(req, res)
 		character.surname = row['surname']
 		character.grades = {} 
 		try{
-			const grades = await pool.query('select id_problemset, grade from gradebook where id_character = $1;', [row['id']])
+			const grades = await pool.query('select id_problemset, grade, url from gradebook  where id_character = $1;', [row['id']])
 			for(let row2 of grades.rows)
 			{
-				character.grades[row2['id_problemset']] = row2['grade']
+				character.grades[row2['id_problemset']] = {grade: row2['grade'], url: row2['url']}
 			}
 		}
 		catch(err)
