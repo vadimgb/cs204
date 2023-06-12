@@ -1,0 +1,30 @@
+<%- include('../partials/head.ejs') %>
+<title>Результаты</title>
+<script src='/javascripts/results/index_view.js' ></script>
+</head>
+<body>
+	<div class='container'>
+		<div class='row'>
+			<select autocomplete='off' id='houseSelect' name = 'id_house' required >
+				<option  selected disabled value=''>Выберите группу</option>
+					<% for(let row of houses){%>
+						<option value=<%= row.id %> ><%= row.house %></option>
+					<%}%>
+			</select>
+		</div>
+
+
+
+		<div class='row'>
+			<table class ='table table-success' id='gradesTable'>
+			</table>
+		</div>
+
+		<h2>Задания</h2>
+		<div class='row'>
+			<table class='table table-info' id='psetTable'>
+			</table>
+		</div>
+	</div>	
+	</body>
+</html>

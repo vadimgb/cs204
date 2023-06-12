@@ -18,6 +18,9 @@ async function index(req, res)
 			})
 	}
 
+
+
+
 async function register(req, res)
 	{
 		const res1 = await pool.query(`select * from characters where username = $1`, [req.session.username])

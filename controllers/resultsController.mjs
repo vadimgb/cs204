@@ -7,7 +7,11 @@ async function index(req, res)
 	res.render('results/index.ejs', {houses: request.rows})
 }
 
-
+async function index_view(req, res) 
+{
+	const request = await pool.query('select * from houses where id <> 1 and is_active = true;')
+	res.render('results/index_view.ejs', {houses: request.rows})
+}
 
 async function api_grades(req, res) 
 {
@@ -71,4 +75,4 @@ async function api_delete(req, res)
 }
 
 
-export {index, api_grades, api_delete}
+export {index, index_view, api_grades, api_delete}
