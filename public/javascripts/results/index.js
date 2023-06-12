@@ -31,11 +31,11 @@ async function grades_rows()
 			let cellGrade = row.insertCell()
 			if(problem['id_problemset'] == 1)
 			{ 
-				cellGrade.innerHTML = `<input size=1 value='${grades[i].grades[problem['id_problemset']]}' onchange='addGradeToDb(this.value, ${grades[i].id}, ${problem['id_problemset']})'>`;
+				cellGrade.innerHTML = `<input size=1 value='${grades[i].grades[problem['id_problemset']].grade}' onchange='addGradeToDb(this.value, ${grades[i].id}, ${problem['id_problemset']})'>`;
 			}
 			else
 			{ 
-				cellGrade.innerHTML = `<div title=${problem['name']}>${grades[i].grades[problem['id_problemset']]}</div>`;
+				cellGrade.innerHTML = `<div title=${problem['name']}><a href=${grades[i].grades[problem['id_problemset']].url}>${grades[i].grades[problem['id_problemset']].grade}</a></div>`;
 			}
 		}
 		
@@ -54,7 +54,7 @@ async function grades_rows()
 		let cellId = row.insertCell()
 		let cellName = row.insertCell()
 		cellId.innerHTML = pset[i]['id_problemset']
-		cellName.innerHTML = pset[i]['name']
+		cellName.innerHTML =`<a href=${pset[i]['description']}> ${pset[i]['name']}</a>`
 	}
 }
 
