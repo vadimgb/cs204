@@ -26,7 +26,8 @@ async function grades_rows()
 		let cellGrade = row.insertCell()
 		let cellNotes = row.insertCell()
 		cellHouse.innerHTML = grades[i].house
-		cellPset.innerHTML = grades[i].id_problemset
+		//cellPset.innerHTML = grades[i].id_problemset
+		cellPset.innerHTML = `<a href='${grades[i].description}'>${grades[i].name}</a>`
 		cellLastName.innerHTML = grades[i].lastname
 		cellFirstName.innerHTML = grades[i].firstname 
 		if(grades[i].is_done) 

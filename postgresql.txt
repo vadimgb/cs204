@@ -1,3 +1,23 @@
+#Копируем базу данных 
+psql -U vadim -d postrgres
+drop database gradebook;
+
+create database gradeboo;
+\q
+
+pg_dump $CS204_HOME > gradebook.dump
+
+psql -U vadim -d postrgres
+drop database gradebook;
+-------------------
+
+
+create database gradeboo;
+\q
+
+psql $DATABASE_URL < gradebook.dump
+
+
 ide.cs50.io
 sudo service postgresql start
 sudo service postgresql status
