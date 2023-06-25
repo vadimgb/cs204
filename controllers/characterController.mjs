@@ -14,7 +14,17 @@ async function gradebook(req, res)
 			join characters on characters.id = gradebook.id_character 
 			where characters.username = $1) select1 
 			on problemset.id = select1.id_problemset`
-		const res2 = await pool.query(sql1, [req.session.username]) 
+
+		const sql2 = `select problemset.name , select1.grade, select1.notes, problemset.description, 
+			select1.url, select1.is_done
+			from problemset join 
+			(select id_problemset, gradebook.grade, gradebook.notes, gradebook.url, gradebook.is_done 
+			from gradebook 
+			join characters on characters.id = gradebook.id_character 
+			where characters.username = $1 ) select1 
+			on problemset.id = select1.id_problemset;`
+
+		const res2 = await pool.query(sql2, [req.session.username]) 
 		res.render('character/gradebook.ejs', { "result": res2.rows, username: req.session.username}) 
 	}
 	catch(err)

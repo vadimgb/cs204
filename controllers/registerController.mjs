@@ -30,8 +30,6 @@ async function register(req, res)
 		}
 		else
 		{
-		
-
 		await createRepo(process.env.ORGANIZATION, process.env.TSPU_TOKEN,  req.session.username)
 		const {firstname, lastname, surname, id_house} = req.body
 		req.session.id_house = id_house
