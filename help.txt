@@ -32,3 +32,14 @@ left join
 (select c.id, c.lastname, c.firstname, houses.house from characters as c left join houses on c.id_house = houses.id) ch
 on g.id_character = ch.id
 left join problemset on g.id_problemset = problemset.id;
+
+
+select problemset.name , select1.grade, select1.notes, problemset.description, 
+select1.url, select1.is_done
+from problemset join 
+(select id_problemset, gradebook.grade, gradebook.notes, gradebook.url, gradebook.is_done 
+from gradebook 
+join characters on characters.id = gradebook.id_character 
+where characters.username = 'vadimgb11') select1 
+on problemset.id = select1.id_problemset;
+

@@ -7,7 +7,18 @@
 			<table class='table table-prime'>
 			<% for(let res of result) { %>
 				<tr>
-					<td><%= res.name %></td> 
+					<td>
+						<a href='<%=res.description %>' >
+							<%= res.name %>
+						</a> 
+					</td> 
+					<td>
+						<% if (res.is_done == true) { %>
+							<a href='<%= res.url %>'>
+								________	
+							</a>
+						<% } %>
+					</td>
 					<td> <%= res.grade %></td>
 					<td><%= res.notes %></td>
 				<%}%>
