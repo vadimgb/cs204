@@ -1,3 +1,11 @@
+#Копия базы данных
+pg_dump $DB_URL > gradebook.dump
+psql -U vadim -d postgres
+drop database gradebook;
+create database gradebook;
+\q
+psql $DB_URL < gradebook.dump
+
 #Тестирование
 sudo ufw disable
 npm run strat
