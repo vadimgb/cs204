@@ -8,13 +8,6 @@ async function gradebook(req, res)
 {
 	try
 	{
-		const sql1 = `select problemset.name , select1.grade, 
-			select1.notes from problemset join (select id_problemset, 
-			gradebook.grade, gradebook.notes from gradebook 
-			join characters on characters.id = gradebook.id_character 
-			where characters.username = $1) select1 
-			on problemset.id = select1.id_problemset`
-
 		const sql2 = `select problemset.name , select1.grade, select1.notes, problemset.description, 
 			select1.url, select1.is_done
 			from problemset join 
