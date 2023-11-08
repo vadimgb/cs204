@@ -43,3 +43,8 @@ join characters on characters.id = gradebook.id_character
 where characters.username = 'vadimgb11') select1 
 on problemset.id = select1.id_problemset;
 
+
+
+delete from gradebook where id_character=n;
+delete from presences where id_character=820;
+delete from characters where id_character=820;

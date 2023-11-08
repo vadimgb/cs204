@@ -35,6 +35,7 @@ async function api_delete(req, res)
 		if(characters_id.length)
 		{
 			const sql2 = `delete from gradebook where id_character in (${characters_id}); 
+			delete from presences where id_character in (${characters_id}); 
 			delete from characters where id in (${characters_id});`
 
 			await pool.query(sql2)	
@@ -49,6 +50,7 @@ async function api_delete(req, res)
 		if(remove_list.length)
 		{
 			const sql3 = `delete from plan  where id_house in (${remove_list});
+			delete from lectures where id_house in (${remove_list});
 			delete from emails  where id_house in (${remove_list});
 			delete from houses where id in (${remove_list});`
 
