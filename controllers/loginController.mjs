@@ -57,46 +57,63 @@ async function callback(req, res)
 //----------------help functions
 async function getAccessToken(code)//change code for access token.
 {
-	const res = await fetch('https://github.com/login/oauth/access_token',
-		{
-			method: 'POST',
-			headers:{
-				'Content-Type':'application/json',
-				'Accept':'application/json'},
-			body: JSON.stringify({
-				client_id,
-				client_secret,
-				code})
-		})
-	const data = await res.json()
-	const token = data['access_token']
-	return token 
+	try{
+		const res = await fetch('https://github.com/login/oauth/access_token',
+			{
+				method: 'POST',
+				headers:{
+					'Content-Type':'application/json',
+					'Accept':'application/json'},
+				body: JSON.stringify({
+					client_id,
+					client_secret,
+					code}) 
+			})
+		const data = await res.json()
+		const token = data['access_token']
+		return token 
+	}catch(error) 
+	{
+		console.log(error)
+	}
+
 }
 
 async function getGithubUser(token)//use access token to access api
 {
-	const res = await fetch("https://api.github.com/user",
+	try{
+
+		const res = await fetch("https://api.github.com/user",
+		{
+			headers:
+			{ 
+				"Authorization": `token ${token}`
+			}
+		})
+		const data = await res.json()
+		return data['login']
+	}catch(error)
 	{
-		headers:
-		{ 
-			"Authorization": `token ${token}`
-		}
-	})
-	const data = await res.json()
-	return data['login']
+		console.log(error)
+	}
 }
 
 async function getUserEmail(token)
 {
-	const res = await fetch("https://api.github.com/user/emails",
+	try{
+		const res = await fetch("https://api.github.com/user/emails",
+		{
+			headers:
+			{ 
+				"Authorization": `token ${token}`
+			}
+		})
+		const data = await res.json()
+		return data[0]['email']
+	}catch(error)
 	{
-		headers:
-		{ 
-			"Authorization": `token ${token}`
-		}
-	})
-	const data = await res.json()
-	return data[0]['email']
+		console.log(error)
+	}
 }
 
 export {index, callback}
