@@ -29,7 +29,7 @@ async function grades_rows()
 		for(let problem of pset)
 		{
 			let cellGrade = row.insertCell()
-			if(problem['id_problemset'] == 1)
+			if(problem['id_problemset'] == 1 || problem['id_problemset'] == 2 || problem['id_problemset'] == 47  )
 			{ 
 				cellGrade.innerHTML = `<input size=1 value='${grades[i].grades[problem['id_problemset']].grade}' onchange='addGradeToDb(this.value, ${grades[i].id}, ${problem['id_problemset']})'>`;
 			}

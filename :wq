@@ -33,10 +33,16 @@ async function api_grades(req, res)
 async function api_addGradeToDb(req, res) 
 {
 	const id_character = req.body.id_character
+	console.log("id_characer=", id_character)
 	const id_problemset = req.body.id_problemset
+	console.log("id_problemset=", id_problemset)
 	const grade = req.body.grade
+	console.log("grade =", grade)
 	const is_checked = grade ? true: false
-	const sql = `update gradebook set grade = $1, is_checked = $4 where id_character = $2 and id_problemset = $3;`
+	console.log("is_checked=", is_checked)
+	const sql = `insert into gradebook (grade, id_character, id_problemset, is_checked) values ($1, $2, $3, $4) on duplicate key update grade=$1, is_checked=$4;`
+
+//	const sql = `update gradebook set grade = $1, is_checked = $4 where id_character = $2 and id_problemset = $3;`
 	try{
 		const result = await pool.query(sql, [grade, id_character, id_problemset, is_checked])
 		res.send('ok')
@@ -46,7 +52,6 @@ async function api_addGradeToDb(req, res)
 		console.log('cant change grade', err)
 	}
 	const sql2 = `select firstname, surname, email from characters where id = $1;`
-	try{
 	const result2 = await pool.query(sql2, [id_character])
 	const sql3 = `select name from problemset where id = $1;`
 	const result3 = await pool.query(sql3, [id_problemset])
@@ -57,10 +62,6 @@ async function api_addGradeToDb(req, res)
 	const message = `Задание ${result3.rows[0].name} проверено.
 	Смотрите результаты на http://${process.env.HOST} .`
 	sendEmail(email_to, firstname, surname, subject, message)
-	}catch(error)
-	{
-		console.log("cant send mail")
-	}
 }
 
 async function api_addNotesToDb(req, res) 
