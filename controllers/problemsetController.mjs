@@ -14,7 +14,7 @@ async function api_list(req, res)
 
 async function api_add(req, res)
 {
-	await pool.query(`insert into problemset (name) values ($1)`, [req.body.name])
+	await pool.query(`insert into problemset (name, description) values ($1, $2)`, [req.body.name, req.body.description])
 	res.end('ok')
 }
 
