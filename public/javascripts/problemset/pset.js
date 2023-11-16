@@ -33,7 +33,7 @@ async function pset_list()
 async function addProblem() 
 		{
 			const url ='/problemset/api_add';
-			const data = {name: nameInput.value};
+			const data = {name: nameInput.value, description: description.value};
 			const result = await fetch(url, 
 				{
 					method:'POST',
